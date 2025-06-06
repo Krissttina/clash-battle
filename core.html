@@ -1,79 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Vote App</title>
-  <style>
-    .button { 
-    padding: 20px; 
-    font-size: 1.2rem; 
-    margin: 10px; 
-    }
-    
-    .disabled { 
-    background: #ccc; 
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Vote App</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://kit.fontawesome.com/420ba10640.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <h1>Vote for your favorite option</h1>
-  <button id="btnA" class="button">Option A</button>
-  <button id="btnB" class="button">Option B</button>
-  <p id="message"></p>
-  <h2 id="results"></h2>
+    <h1>Vote for your favorite option</h1>
+    <button id="btnA" class="button">Option A</button>
+    <button id="btnB" class="button">Option B</button>
+    <p id="message"></p>
+    <h2 id="results"></h2>
 
-  <script>
-    const btnA = document.getElementById("btnA");
-    const btnB = document.getElementById("btnB");
-    const message = document.getElementById("message");
-    const results = document.getElementById("results");
+    <script>
+        const btnA = document.getElementById("btnA");
+        const btnB = document.getElementById("btnB");
+        const message = document.getElementById("message");
+        const results = document.getElementById("results");
 
-    // Disable if already voted
-    if (localStorage.getItem("voted")) {
-      disableButtons();
-      message.textContent = "You already voted.";
-    }
+        // Disable if already voted
+        if (localStorage.getItem("voted")) {
+            disableButtons();
+            message.textContent = "You already voted.";
+        }
 
-    btnA.addEventListener("click", () => vote("A"));
-    btnB.addEventListener("click", () => vote("B"));
+        btnA.addEventListener("click", () => vote("A"));
+        btnB.addEventListener("click", () => vote("B"));
 
-    function vote(option) {
-      if (localStorage.getItem("voted")) return;
+        function vote(option) {
+            if (localStorage.getItem("voted")) return;
 
-      fetch("/vote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ option })
-      })
-      .then(res => res.json())
-      .then(data => {
-        localStorage.setItem("voted", option);
-        message.textContent = `You voted for Option ${option}`;
-        disableButtons();
-      });
-    }
+            fetch("/vote", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ option })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    localStorage.setItem("voted", option);
+                    message.textContent = `You voted for Option ${option}`;
+                    disableButtons();
+                });
+        }
 
-    function disableButtons() {
-      btnA.disabled = true;
-      btnB.disabled = true;
-      btnA.classList.add("disabled");
-      btnB.classList.add("disabled");
-    }
+        function disableButtons() {
+            btnA.disabled = true;
+            btnB.disabled = true;
+            btnA.classList.add("disabled");
+            btnB.classList.add("disabled");
+        }
 
-    // Poll for results every 10 seconds
-    setInterval(() => {
-      fetch("/results")
-        .then(res => {
-          if (!res.ok) throw new Error();
-          return res.json();
-        })
-        .then(data => {
-          results.innerHTML = `Results:<br>Option A: ${data.A}<br>Option B: ${data.B}`;
-        })
-        .catch(() => {
-          results.textContent = "Results will be available soon.";
-        });
-    }, 10000);
-  </script>
+        // Poll for results every 10 seconds
+        setInterval(() => {
+            fetch("/results")
+                .then(res => {
+                    if (!res.ok) throw new Error();
+                    return res.json();
+                })
+                .then(data => {
+                    results.innerHTML = `Results:<br>Option A: ${data.A}<br>Option B: ${data.B}`;
+                })
+                .catch(() => {
+                    results.textContent = "Results will be available soon.";
+                });
+        }, 10000);
+    </script>
 </body>
+
 </html>

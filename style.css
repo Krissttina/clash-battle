@@ -1,0 +1,9 @@
+.button { 
+    padding: 20px; 
+    font-size: 1.2rem; 
+    margin: 10px; 
+    }
+    
+    .disabled { 
+    background: #ccc; 
+    }

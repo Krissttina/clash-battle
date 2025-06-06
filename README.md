@@ -11,3 +11,5 @@ npm install express body-parser cors
 ✅ 2. Build page
 
 ✅ 3. Build Server
+
+✅ 4. Build Style with CSS
