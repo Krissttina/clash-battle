@@ -23,5 +23,41 @@
   <button id="btn2" class="button">Option B</button>
 
   <div id="message"></div>
+  <script>
+    const btn1 = document.getElementById("btn1");
+    const btn2 = document.getElementById("btn2");
+    const message = document.getElementById("message");
+
+    // Check if user already voted
+    if (localStorage.getItem("voted")) {
+      disableButtons();
+      message.textContent = "You have already voted.";
+    }
+
+    btn1.addEventListener("click", () => vote("A"));
+    btn2.addEventListener("click", () => vote("B"));
+
+    function vote(option) {
+      if (localStorage.getItem("voted")) return;
+
+      // Send vote to backend (pseudo-code)
+      // fetch("/vote", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ option }),
+      // });
+
+      localStorage.setItem("voted", option); // store vote locally
+      message.textContent = `You voted for Option ${option}`;
+      disableButtons();
+    }
+
+    function disableButtons() {
+      btn1.disabled = true;
+      btn2.disabled = true;
+      btn1.classList.add("disabled");
+      btn2.classList.add("disabled");
+    }
+  </script>
 </body>
 </html>
