@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 const PORT = 3000;
 
-const VOTE_END_TIME = new Date(Date.now() + 10 * 60 * 1000); // ends in 10 minutes
+const VOTE_END_TIME = new Date(Date.now() + 2 * 60 * 1000); // ends in 10 minutes //2
 
 app.use(cors());
 app.use(express.json());
