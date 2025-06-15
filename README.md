@@ -14,7 +14,10 @@ npm install express body-parser cors
 
 ✅ 4. Build Style with CSS
 
-npm install express  to Install Express
-node server.js to start the Server
-npm init -y  Инициализиране на Node проект 
-ctrl + c to ttop the server
+✅ 4. Result Cound down
+
+Useful commands:
+npm install express - Install Express
+node server.js - start the Server
+npm init -y - Инициализиране на Node проект 
+ctrl + c - stop the server
