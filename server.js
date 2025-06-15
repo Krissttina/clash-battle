@@ -43,6 +43,11 @@ app.post("/vote", (req, res) => {
   res.json({ message: "Vote counted!" });
 });
 
+//Expose VOTE_END_TIME
+app.get("/end-time", (req, res) => {
+  res.json({ endTime: VOTE_END_TIME });
+});
+
 // Get results (only if voting has ended)
 app.get("/results", (req, res) => {
   const now = new Date();
