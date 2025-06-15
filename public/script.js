@@ -28,6 +28,8 @@ function vote(option) {
         });
 }
 
+console.log(JSON);
+
 function disableButtons() {
     btnA.disabled = true;
     btnB.disabled = true;
@@ -37,7 +39,7 @@ function disableButtons() {
 
 // Poll for results every 10 seconds
 setInterval(() => {
-    fetch("/core.html")
+    fetch("/results")
         .then(res => {
             if (!res.ok) throw new Error();
             return res.json();

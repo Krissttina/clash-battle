@@ -3,9 +3,9 @@ const fs = require("fs");
 const cors = require("cors");
 const app = express();
 const PORT = 3000;
-const path = require('path'); // <-- Това е важно!
+const path = require('path');
 
-const VOTE_END_TIME = new Date(Date.now() + 2 * 60 * 1000); // ends in 10 minutes //2
+const VOTE_END_TIME = new Date(Date.now() + 30 * 1000); // 30 seconds from now
 
 app.use(cors());
 app.use(express.json());
@@ -46,10 +46,11 @@ app.post("/vote", (req, res) => {
 // Get results (only if voting has ended)
 app.get("/results", (req, res) => {
   const now = new Date();
-  if (now < VOTE_END_TIME) {
+  if (now > VOTE_END_TIME) {
+   res.json(votes); 
+  }else{
     return res.status(403).json({ message: "Results not available yet." });
-  }
-  res.json(votes);
+  } 
 });
 
 app.listen(PORT, () => {
