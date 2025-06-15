@@ -3,12 +3,21 @@ const fs = require("fs");
 const cors = require("cors");
 const app = express();
 const PORT = 3000;
+const path = require('path'); // <-- Това е важно!
 
 const VOTE_END_TIME = new Date(Date.now() + 2 * 60 * 1000); // ends in 10 minutes //2
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
+
+// Настройка на папката със статични файлове
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Когато се посети "/"
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // Load or initialize votes
 let votes = { A: 0, B: 0 };

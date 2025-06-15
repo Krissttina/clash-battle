@@ -28,16 +28,16 @@ function vote(option) {
         });
 }
 
-// function disableButtons() {
-//     btnA.disabled = true;
-//     btnB.disabled = true;
-//     btnA.classList.add("disabled");
-//     btnB.classList.add("disabled");
-// }
+function disableButtons() {
+    btnA.disabled = true;
+    btnB.disabled = true;
+    btnA.classList.add("disabled");
+    btnB.classList.add("disabled");
+}
 
 // Poll for results every 10 seconds
 setInterval(() => {
-    fetch("/results")
+    fetch("/core.html")
         .then(res => {
             if (!res.ok) throw new Error();
             return res.json();
