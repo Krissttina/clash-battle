@@ -1,9 +1,10 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url("img/page-bg-1920x1080.jpg");
+    background-image: url("img/clash-battle-bg.jpg");
     background-color: #cccccc;
-    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100%;
     box-sizing: border-box;
 }
 
