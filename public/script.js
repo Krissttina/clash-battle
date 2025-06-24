@@ -2,6 +2,7 @@ const btnA = document.getElementById("btnA");
 const btnB = document.getElementById("btnB");
 const message = document.getElementById("message");
 const results = document.getElementById("results");
+const countdown = document.getElementById("countdown");
 
 // Disable if already voted
 if (localStorage.getItem("voted")) {
